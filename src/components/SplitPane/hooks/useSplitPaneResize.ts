@@ -69,10 +69,10 @@ export const useSplitPaneResize = (options: SplitPaneResizeOptions): SplitPaneRe
   const collapsedSize = useCollapsedSize({ collapseOptions });
   const childPanes = useChildPanes({ minSizes, children, paneRefs });
   const isReversed = useIsCollapseReversed(collapseOptions);
-  const initialSizes = useMemo(
-    () => children.map((_c, idx) => originalDefaults?.[idx] ?? 1),
-    [children, originalDefaults]
-  );
+  const initialSizes = useMemo(() => children.map((_c, idx) => originalDefaults?.[idx] ?? 1), [
+    children,
+    originalDefaults,
+  ]);
 
   // STATE: a map keeping track of all of the pane sizes
   const [sizes, setSizes] = useState<number[]>(initialSizes);
