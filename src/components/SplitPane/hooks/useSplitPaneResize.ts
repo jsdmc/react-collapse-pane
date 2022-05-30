@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import { SplitPaneProps, CollapseOptions } from '..';
 import { useDragState, BeginDragCallback } from './effects/useDragState';
 import { useMinSizes } from './memos/useMinSizes';
@@ -13,9 +13,9 @@ import { useCollapseSize } from './callbacks/useCollapseSize';
 import { useUncollapseSize } from './callbacks/useUncollapseSize';
 import { useUpdateCollapsedSizes } from './callbacks/useUpdateCollapsedSizes';
 import { useCollapsedSize } from './memos/useCollapsedSize';
-import { debounce } from '../helpers';
+// import { debounce } from '../helpers';
 import { useRecalculateSizes } from './callbacks/useRecalculateSizes';
-import { useEventListener } from '../../../hooks/useEventListener';
+// import { useEventListener } from '../../../hooks/useEventListener';
 import { Nullable } from '../../../types/utilities';
 
 export interface ChildPane {
@@ -69,10 +69,10 @@ export const useSplitPaneResize = (options: SplitPaneResizeOptions): SplitPaneRe
   const collapsedSize = useCollapsedSize({ collapseOptions });
   const childPanes = useChildPanes({ minSizes, children, paneRefs });
   const isReversed = useIsCollapseReversed(collapseOptions);
-  const initialSizes = useMemo(() => children.map((_c, idx) => originalDefaults?.[idx] ?? 1), [
-    children,
-    originalDefaults,
-  ]);
+  const initialSizes = useMemo(
+    () => children.map((_c, idx) => originalDefaults?.[idx] ?? 1),
+    [children, originalDefaults]
+  );
 
   // STATE: a map keeping track of all of the pane sizes
   const [sizes, setSizes] = useState<number[]>(initialSizes);
@@ -149,11 +149,11 @@ export const useSplitPaneResize = (options: SplitPaneResizeOptions): SplitPaneRe
   }, [collapsedIndices]);
   // recalculate initial sizes on window size change to maintain min sizes
 
-  const resetSizes = useCallback(
-    debounce(() => recalculateSizes(), 100),
-    [recalculateSizes]
-  );
-  useEventListener('resize', resetSizes);
+  // const resetSizes = useCallback(
+  //   debounce(() => recalculateSizes(), 100),
+  //   [recalculateSizes]
+  // );
+  // useEventListener('resize', resetSizes);
   useEffect(
     () => recalculateSizes(initialSizes),
     // eslint-disable-next-line react-hooks/exhaustive-deps
