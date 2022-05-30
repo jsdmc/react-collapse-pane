@@ -1153,15 +1153,14 @@ var SplitPane = function SplitPane(props) {
     originalValue: props.collapse,
     isReversed: isReversed
   });
-  var updatedCollapsedIndices = convertCollapseSizesToIndices(collapsedSizes);
 
-  var _useState = React.useState(updatedCollapsedIndices),
+  var _useState = React.useState(convertCollapseSizesToIndices(collapsedSizes)),
       collapsedIndices = _useState[0],
       setCollapsed = _useState[1];
 
   React.useEffect(function () {
-    setCollapsed(updatedCollapsedIndices);
-  }, [updatedCollapsedIndices]);
+    setCollapsed(convertCollapseSizesToIndices(collapsedSizes));
+  }, [collapsedSizes]);
 
   var _useSplitPaneResize = useSplitPaneResize(_extends({}, props, {
     isLtr: isLtr,
