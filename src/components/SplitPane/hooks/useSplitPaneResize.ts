@@ -157,7 +157,7 @@ export const useSplitPaneResize = (options: SplitPaneResizeOptions): SplitPaneRe
   useEffect(
     () => recalculateSizes(initialSizes),
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    []
+    [initialSizes]
   );
   //populates the sizes of all the initially populated childPanes, adjust sizes based on collapsed state
   const childPanesWithSizes: ChildPane[] = useMemo(
