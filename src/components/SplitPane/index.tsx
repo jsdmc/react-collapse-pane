@@ -71,13 +71,13 @@ export const SplitPane: React.FC<SplitPaneProps> = props => {
     isReversed,
   });
 
-  const updatedCollapsedIndices = convertCollapseSizesToIndices(collapsedSizes);
-
-  const [collapsedIndices, setCollapsed] = useState<number[]>(updatedCollapsedIndices);
+  const [collapsedIndices, setCollapsed] = useState<number[]>(
+    convertCollapseSizesToIndices(collapsedSizes)
+  );
 
   useEffect(() => {
-    setCollapsed(updatedCollapsedIndices);
-  }, [updatedCollapsedIndices]);
+    setCollapsed(convertCollapseSizesToIndices(collapsedSizes));
+  }, [collapsedSizes]);
 
   const { childPanes, handleDragStart, resizingIndex } = useSplitPaneResize({
     ...props,
