@@ -1000,11 +1000,12 @@ var useSplitPaneResize = function useSplitPaneResize(options) {
   useEffect(function () {
     updateCollapsedSizes(collapsedIndices); // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [collapsedIndices]); // recalculate initial sizes on window size change to maintain min sizes
+  // const resetSizes = useCallback(
+  //   debounce(() => recalculateSizes(), 100),
+  //   [recalculateSizes]
+  // );
+  // useEventListener('resize', resetSizes);
 
-  var resetSizes = useCallback(debounce(function () {
-    return recalculateSizes();
-  }, 100), [recalculateSizes]);
-  useEventListener('resize', resetSizes);
   useEffect(function () {
     return recalculateSizes(initialSizes);
   }, // eslint-disable-next-line react-hooks/exhaustive-deps
